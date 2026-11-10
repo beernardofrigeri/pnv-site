@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato - PNV</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/logo-badge.png" />
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">
+      <img src="assets/logo-badge.png" alt="Logo PNV" />
+      PNV
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html"><span>01</span> Início</a></li>
+        <li><a href="sobre.html"><span>02</span> Sobre</a></li>
+        <li><a href="propostas.html"><span>03</span> Propostas</a></li>
+        <li><a href="integrantes.html"><span>04</span> Integrantes</a></li>
+        <li><a href="noticias.html"><span>05</span> Notícias</a></li>
+        <li><a href="contato.html"><span>06</span> Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Vote 50</span><span>Nova Visão para o bem do cidadão</span><span>Vote 50</span><span>Nova Visão para o bem do cidadão</span>
+      <span>Vote 50</span><span>Nova Visão para o bem do cidadão</span><span>Vote 50</span><span>Nova Visão para o bem do cidadão</span>
+    </div>
+  </div>
+
+  <main>
+    <h1 class="page-title">Fale Conosco</h1>
+    <form onsubmit="return enviarContato(event)">
+      <input type="text" placeholder="Seu nome" required />
+      <input type="email" placeholder="Seu e-mail" required />
+      <textarea rows="5" placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-marca">VOTE<br /><span>50</span></div>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="propostas.html">Propostas</a>
+        <a href="integrantes.html">Integrantes</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 PNV — Partido Nova Visão</span>
+      <span>Nova visão para o bem do cidadão</span>
+    </div>
+  </footer>
+
+  <script>
+    function enviarContato(event) {
+      event.preventDefault();
+      alert("Mensagem enviada! (formulário de demonstração - ainda sem backend)");
+      event.target.reset();
+      return false;
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

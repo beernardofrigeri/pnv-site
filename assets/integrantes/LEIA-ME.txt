@@ -1,0 +1,3 @@
+Coloque aqui as fotos dos 11 integrantes do grupo, nomeadas de 01.jpg a 11.jpg,
+na mesma ordem em que aparecem na página "Integrantes" do site.
+Assim que um arquivo for adicionado, a foto substitui automaticamente o placeholder.
