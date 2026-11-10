@@ -34,14 +34,33 @@
 
   <main>
     <h1 class="page-title">Notícias</h1>
-    <div class="cartao">
-      <h2>Título da notícia (a se definir)</h2>
-      <p>Resumo da notícia a se definir. Conteúdo em breve.</p>
-    </div>
-    <div class="cartao">
-      <h2>Título da notícia (a se definir)</h2>
-      <p>Resumo da notícia a se definir. Conteúdo em breve.</p>
-    </div>
+    <p>
+      Acompanhe atualizações da campanha, agendas territoriais e ações do Partido Nova Visão.
+      As notícias abaixo são carregadas de um banco de dados simples em JSON.
+    </p>
+
+    <section class="noticias-layout" data-reveal>
+      <article class="noticia-destaque" id="noticiaDestaque">
+        <span class="tag">Partido</span>
+        <h2>Carregando destaque...</h2>
+        <p>As informações mais recentes do PNV aparecerão aqui.</p>
+        <div class="meta">PNV Comunicação</div>
+      </article>
+      <aside class="noticias-info">
+        <h3>Informativo 50</h3>
+        <p>Atualizações periódicas das frentes de educação, saúde, segurança e economia.</p>
+        <ul>
+          <li>Agenda de bairros e escuta popular</li>
+          <li>Comunicados de propostas</li>
+          <li>Ações dos 11 integrantes do grupo</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="noticias-lista" data-reveal>
+      <h2>Mais notícias do partido</h2>
+      <div class="noticias-grid" id="noticiasLista"></div>
+    </section>
   </main>
 
   <footer>
@@ -62,6 +81,7 @@
     </div>
   </footer>
 
+  <script src="database.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

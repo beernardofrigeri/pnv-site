@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=Space+Mono:wght@400;700&display=swap");
 
 :root {
-  --roxo-escuro: #1c0720;
-  --roxo: #41122f;
-  --roxo-medio: #5c1f45;
-  --roxo-claro: #7a2b5c;
+  --roxo-escuro: #19031f;
+  --roxo: #4a1660;
+  --roxo-medio: #672783;
+  --roxo-claro: #8b3caf;
   --laranja: #e4720f;
   --laranja-vivido: #ff7a1a;
   --laranja-escuro: #a84f0b;
-  --lavanda: #e8c4f0;
-  --creme: #f3ead6;
-  --bege: #e4d3ae;
+  --lavanda: #e8d8f2;
+  --creme: #f5eefb;
+  --bege: #ead9f3;
   --branco: #ffffff;
   --tinta: #150910;
   --cinza-claro: #f4f4f4;
@@ -35,7 +35,7 @@ html {
 body {
   font-family: var(--fonte-base);
   color: var(--tinta);
-  background: var(--creme);
+  background: var(--lavanda);
   line-height: 1.5;
   overflow-x: hidden;
 }
@@ -141,7 +141,7 @@ header {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.9rem 2rem;
-  background: var(--roxo-escuro);
+  background: var(--roxo);
   border-bottom: 4px solid var(--tinta);
   flex-wrap: wrap;
   position: sticky;
@@ -218,7 +218,7 @@ nav ul li a.active span {
 
 /* ===== Marquee (faixa de propaganda) ===== */
 .marquee {
-  background: var(--tinta);
+  background: var(--roxo-medio);
   color: var(--creme);
   border-bottom: 4px solid var(--laranja);
   overflow: hidden;
@@ -638,7 +638,7 @@ main {
   border-left-width: 10px;
   padding: 1.6rem 1.8rem;
   margin-bottom: 1.4rem;
-  box-shadow: 7px 7px 0 var(--bege);
+  box-shadow: 7px 7px 0 var(--roxo-claro);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -709,7 +709,7 @@ form {
   margin: 0 auto;
   border: 3px solid var(--tinta);
   padding: 2rem;
-  background: var(--branco);
+  background: var(--creme);
   box-shadow: 8px 8px 0 var(--roxo-medio);
 }
 
@@ -753,8 +753,223 @@ footer {
   position: relative;
   padding: 4rem 6vw 2rem;
   color: var(--creme);
-  background: var(--tinta);
+  background: var(--roxo-escuro);
   border-top: 4px solid var(--laranja);
+}
+
+/* ===== Notícias ===== */
+.noticias-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.noticia-destaque {
+  background: var(--roxo-escuro);
+  color: var(--creme);
+  border: 3px solid var(--tinta);
+  padding: 2rem;
+  box-shadow: 10px 10px 0 var(--laranja);
+}
+
+.noticia-destaque h2 {
+  font-family: var(--fonte-display);
+  text-transform: uppercase;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.95;
+  margin: 0.8rem 0;
+}
+
+.noticia-destaque p {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border: 2px solid var(--tinta);
+  background: var(--laranja);
+  color: var(--tinta);
+}
+
+.meta {
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.noticias-info {
+  border: 3px solid var(--tinta);
+  background: var(--bege);
+  padding: 1.5rem;
+  box-shadow: 8px 8px 0 var(--roxo-medio);
+}
+
+.noticias-info h3 {
+  font-family: var(--fonte-display);
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  color: var(--roxo);
+}
+
+.noticias-info ul {
+  margin-top: 1rem;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.noticias-lista {
+  margin-top: 2.5rem;
+}
+
+.noticias-lista h2,
+.mensagens-salvas h2,
+.contato-info h2 {
+  font-family: var(--fonte-display);
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 0.7rem;
+  color: var(--roxo);
+}
+
+.noticias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.noticia-card {
+  border: 3px solid var(--tinta);
+  background: var(--creme);
+  padding: 1.1rem;
+  box-shadow: 6px 6px 0 var(--roxo-claro);
+}
+
+.noticia-card h3 {
+  font-family: var(--fonte-display);
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0.7rem 0;
+  font-size: 1.45rem;
+}
+
+.noticia-card p {
+  color: var(--cinza-texto);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+/* ===== Contato ===== */
+.contato-layout {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.5rem;
+}
+
+.contato-info {
+  border: 3px solid var(--tinta);
+  background: var(--bege);
+  padding: 1.5rem;
+  box-shadow: 8px 8px 0 var(--roxo-medio);
+}
+
+.contato-info p {
+  font-weight: 600;
+  color: var(--cinza-texto);
+}
+
+.contato-info ul {
+  margin-top: 1rem;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.contato-form-bloco form {
+  margin: 0;
+  max-width: none;
+}
+
+.contato-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-family: var(--fonte-mono);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.contato-feedback {
+  margin-top: 0.8rem;
+  font-family: var(--fonte-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  color: var(--roxo);
+}
+
+.contato-feedback.erro {
+  color: #8f1010;
+}
+
+.mensagens-salvas {
+  margin-top: 2.4rem;
+}
+
+.mensagens-lista {
+  margin-top: 1rem;
+  list-style: none;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.mensagem-item {
+  border: 3px solid var(--tinta);
+  background: var(--creme);
+  padding: 1rem;
+  box-shadow: 6px 6px 0 var(--roxo-claro);
+}
+
+.mensagem-item strong {
+  font-family: var(--fonte-display);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.mensagem-item span {
+  display: block;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0.3rem 0 0.6rem;
+}
+
+.mensagem-item p {
+  color: var(--cinza-texto);
+  font-weight: 600;
+}
+
+.vazio {
+  border: 2px dashed var(--roxo-medio);
+  padding: 0.9rem;
+  background: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
 }
 
 .footer-top {
@@ -840,6 +1055,11 @@ footer {
 
   .section-head .numero-fantasma {
     display: none;
+  }
+
+  .noticias-layout,
+  .contato-layout {
+    grid-template-columns: 1fr;
   }
 }
 

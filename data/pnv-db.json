@@ -1,0 +1,46 @@
+{
+  "noticias": [
+    {
+      "id": 1,
+      "categoria": "Campanha",
+      "data": "2026-10-28",
+      "titulo": "PNV lança agenda 50 de escuta popular em bairros da cidade",
+      "resumo": "A equipe iniciou um calendário semanal de visitas para coletar propostas diretamente com moradores e lideranças locais."
+    },
+    {
+      "id": 2,
+      "categoria": "Educação",
+      "data": "2026-10-19",
+      "titulo": "Frente de educação apresenta plano de reforço escolar comunitário",
+      "resumo": "O partido propôs turmas de apoio no contraturno com foco em alfabetização, tecnologia e permanência escolar."
+    },
+    {
+      "id": 3,
+      "categoria": "Saúde",
+      "data": "2026-10-11",
+      "titulo": "Equipe técnica do PNV debate ampliação do atendimento básico",
+      "resumo": "A proposta inclui mais horários estendidos em unidades de saúde e fila digital para consultas prioritárias."
+    },
+    {
+      "id": 4,
+      "categoria": "Segurança",
+      "data": "2026-10-03",
+      "titulo": "PNV defende pacto local por prevenção e iluminação pública",
+      "resumo": "As ações priorizam prevenção da violência, ocupação de espaços públicos e melhorias urbanas em áreas críticas."
+    },
+    {
+      "id": 5,
+      "categoria": "Economia",
+      "data": "2026-09-26",
+      "titulo": "Plano de microcrédito para pequenos negócios entra em consulta pública",
+      "resumo": "A iniciativa quer facilitar crédito para empreendedores de bairro com capacitação e acompanhamento técnico."
+    },
+    {
+      "id": 6,
+      "categoria": "Partido",
+      "data": "2026-09-18",
+      "titulo": "PNV confirma 11 integrantes na coordenação de campo",
+      "resumo": "A coordenação será responsável por comunicação de base, mobilização e acompanhamento das propostas prioritárias."
+    }
+  ]
+}

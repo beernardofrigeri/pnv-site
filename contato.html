@@ -34,12 +34,55 @@
 
   <main>
     <h1 class="page-title">Fale Conosco</h1>
-    <form onsubmit="return enviarContato(event)">
-      <input type="text" placeholder="Seu nome" required />
-      <input type="email" placeholder="Seu e-mail" required />
-      <textarea rows="5" placeholder="Sua mensagem" required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
+    <p>
+      Envie dúvidas, sugestões e propostas. As mensagens ficam salvas em um banco local simples
+      (no próprio navegador) para facilitar acompanhamento rápido.
+    </p>
+
+    <section class="contato-layout" data-reveal>
+      <aside class="contato-info">
+        <h2>Canal aberto com o cidadão</h2>
+        <p>
+          O PNV mantém atendimento para demandas da comunidade, propostas de melhoria urbana e
+          convites para encontros territoriais.
+        </p>
+        <ul>
+          <li><strong>E-mail:</strong> contato@pnv50.org</li>
+          <li><strong>WhatsApp:</strong> (00) 90000-0050</li>
+          <li><strong>Atendimento:</strong> seg a sex, 9h às 18h</li>
+        </ul>
+      </aside>
+
+      <section class="contato-form-bloco">
+        <form id="formContato" class="contato-form">
+          <label>Nome completo
+            <input type="text" name="nome" placeholder="Seu nome completo" required />
+          </label>
+          <label>E-mail
+            <input type="email" name="email" placeholder="nome@exemplo.com" required />
+          </label>
+          <label>Telefone (opcional)
+            <input type="text" name="telefone" placeholder="(00) 90000-0000" />
+          </label>
+          <label>Assunto
+            <input type="text" name="assunto" placeholder="Ex: Sugestão para o bairro" />
+          </label>
+          <label>Mensagem
+            <textarea rows="5" name="mensagem" placeholder="Escreva sua mensagem" required></textarea>
+          </label>
+          <button type="submit">Salvar mensagem</button>
+        </form>
+        <p id="contatoFeedback" class="contato-feedback" aria-live="polite"></p>
+      </section>
+    </section>
+
+    <section class="mensagens-salvas" data-reveal>
+      <h2>Mensagens salvas neste dispositivo</h2>
+      <p>Últimas mensagens registradas no banco local do navegador.</p>
+      <ul id="mensagensSalvas" class="mensagens-lista">
+        <li class="vazio">Ainda não há mensagens salvas neste dispositivo.</li>
+      </ul>
+    </section>
   </main>
 
   <footer>
@@ -60,14 +103,7 @@
     </div>
   </footer>
 
-  <script>
-    function enviarContato(event) {
-      event.preventDefault();
-      alert("Mensagem enviada! (formulário de demonstração - ainda sem backend)");
-      event.target.reset();
-      return false;
-    }
-  </script>
+  <script src="database.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
