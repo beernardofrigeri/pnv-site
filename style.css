@@ -850,6 +850,32 @@ footer {
   margin-top: 1rem;
 }
 
+.noticias-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.6rem;
+}
+
+.filtro-btn {
+  border: 2px solid var(--tinta);
+  background: var(--bege);
+  color: var(--tinta);
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+}
+
+.filtro-btn:hover,
+.filtro-btn.ativo {
+  background: var(--roxo);
+  color: var(--creme);
+}
+
 .noticia-card {
   border: 3px solid var(--tinta);
   background: var(--creme);
@@ -928,6 +954,25 @@ footer {
 
 .mensagens-salvas {
   margin-top: 2.4rem;
+}
+
+.btn-secundario {
+  margin-top: 0.8rem;
+  border: 2px solid var(--tinta);
+  background: var(--roxo);
+  color: var(--creme);
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+}
+
+.btn-secundario:hover {
+  background: var(--laranja);
+  color: var(--tinta);
 }
 
 .mensagens-lista {

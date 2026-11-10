@@ -46,6 +46,10 @@
 
     listContacts(limit = 5) {
       return readContacts().slice(0, limit);
+    },
+
+    clearContacts() {
+      writeContacts([]);
     }
   };
 
