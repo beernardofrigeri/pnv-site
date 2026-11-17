@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="assets/logo-badge.png" />
 </head>
-<body>
+<body class="pagina-contato">
   <header>
     <a class="logo" href="index.html">
       <img src="assets/logo-badge.png" alt="Logo PNV" />
@@ -22,41 +22,34 @@
         <li><a href="propostas.html"><span>03</span> Propostas</a></li>
         <li><a href="integrantes.html"><span>04</span> Integrantes</a></li>
         <li><a href="noticias.html"><span>05</span> Notícias</a></li>
-        <li><a href="contato.html"><span>06</span> Contato</a></li>
+        <li><a href="associar.html"><span>06</span> Associe-se</a></li>
+        <li><a href="contato.html"><span>07</span> Contato</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Vote 50</span><span>Nova Visão para o bem do cidadão</span><span>Vote 50</span><span>Nova Visão para o bem do cidadão</span>
-      <span>Vote 50</span><span>Nova Visão para o bem do cidadão</span><span>Vote 50</span><span>Nova Visão para o bem do cidadão</span>
-    </div>
-  </div>
-
-  <main>
-    <h1 class="page-title">Fale Conosco</h1>
-    <p>
-      Envie dúvidas, sugestões e propostas. As mensagens ficam salvas em um banco local simples
-      (no próprio navegador) para facilitar acompanhamento rápido.
-    </p>
+  <main class="contato-main">
+    <header class="contato-abertura" data-reveal>
+      <p class="eyebrow">Contato · PNV</p>
+      <h1 class="page-title">Toda ideia<br /><em>abre caminhos.</em></h1>
+      <p>Escreva uma sugestão, uma pergunta ou uma proposta para o partido.</p>
+    </header>
 
     <section class="contato-layout" data-reveal>
       <aside class="contato-info">
-        <h2>Canal aberto com o cidadão</h2>
+        <span class="contato-simbolo" aria-hidden="true">↘</span>
+        <p class="eyebrow">Vamos conversar</p>
+        <h2>Uma mensagem pode ser o começo.</h2>
         <p>
-          O PNV mantém atendimento para demandas da comunidade, propostas de melhoria urbana e
-          convites para encontros territoriais.
+          Envie seu rascunho pelo formulário. Para registrar interesse em participar do partido,
+          acesse a página de associação.
         </p>
-        <ul>
-          <li><strong>E-mail:</strong> contato@pnv50.org</li>
-          <li><strong>WhatsApp:</strong> (00) 90000-0050</li>
-          <li><strong>Atendimento:</strong> seg a sex, 9h às 18h</li>
-        </ul>
+        <a class="contato-link-associar" href="associar.html">Tenho interesse em me associar <span>↗</span></a>
       </aside>
 
       <section class="contato-form-bloco">
         <form id="formContato" class="contato-form">
+          <p class="contato-form-nota">O rascunho fica salvo apenas neste navegador e não é encaminhado à equipe.</p>
           <label>Nome completo
             <input type="text" name="nome" placeholder="Seu nome completo" required />
           </label>
@@ -72,15 +65,15 @@
           <label>Mensagem
             <textarea rows="5" name="mensagem" placeholder="Escreva sua mensagem" required></textarea>
           </label>
-          <button type="submit">Salvar mensagem</button>
+          <button type="submit">Salvar rascunho</button>
         </form>
         <p id="contatoFeedback" class="contato-feedback" aria-live="polite"></p>
       </section>
     </section>
 
     <section class="mensagens-salvas" data-reveal>
-      <h2>Mensagens salvas neste dispositivo</h2>
-      <p>Últimas mensagens registradas no banco local do navegador.</p>
+      <h2>Seu arquivo local</h2>
+      <p>Rascunhos guardados neste navegador.</p>
       <button type="button" class="btn-secundario" id="limparMensagens">Limpar histórico local</button>
       <ul id="mensagensSalvas" class="mensagens-lista">
         <li class="vazio">Ainda não há mensagens salvas neste dispositivo.</li>
@@ -97,6 +90,7 @@
         <a href="propostas.html">Propostas</a>
         <a href="integrantes.html">Integrantes</a>
         <a href="noticias.html">Notícias</a>
+        <a href="associar.html">Associe-se</a>
         <a href="contato.html">Contato</a>
       </nav>
     </div>

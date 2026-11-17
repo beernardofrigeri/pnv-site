@@ -9,8 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Animação de entrada ao rolar a página
+  document.querySelectorAll(".pagina-integrantes .integrante").forEach((integrante) => {
+    integrante.setAttribute("data-reveal", "");
+  });
   const alvos = document.querySelectorAll("[data-reveal]");
   if ("IntersectionObserver" in window && alvos.length) {
+    document.documentElement.classList.add("motion-ready");
     const observador = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((entrada) => {
@@ -20,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
     alvos.forEach((alvo) => observador.observe(alvo));
   } else {
@@ -29,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   inicializarNoticias();
   inicializarContato();
+  inicializarAssociacao();
 });
 
 function formatarData(isoDate) {
@@ -119,7 +124,7 @@ async function inicializarNoticias() {
     }
 
     renderNoticias();
-  } catch (erro) {
+  } catch {
     lista.innerHTML = "<p class=\"vazio\">Não foi possível carregar as notícias agora.</p>";
   }
 }
@@ -176,7 +181,7 @@ function inicializarContato() {
     window.PNVDatabase.saveContact(contato);
     form.reset();
     if (feedback) {
-      feedback.textContent = "Mensagem registrada com sucesso no banco local deste navegador.";
+      feedback.textContent = "Rascunho salvo neste navegador. Ele não foi enviado à equipe.";
       feedback.classList.remove("erro");
     }
     renderLista();
@@ -192,5 +197,63 @@ function inicializarContato() {
       renderLista();
     });
   }
+}
+
+function inicializarAssociacao() {
+  const form = document.getElementById("formAssociacao");
+  const feedback = document.getElementById("associacaoFeedback");
+  const status = document.getElementById("associacaoStatus");
+  if (!form || !feedback || !status) return;
+
+  const config = window.PNV_SUPABASE_CONFIG;
+  if (!window.PNVDatabase?.isSupabaseConfigured() || !config) {
+    status.textContent = "Cadastro indisponível no momento. Nenhum dado será enviado.";
+    return;
+  }
+
+  const responsavel = document.getElementById("associacaoResponsavel");
+  responsavel.textContent = `Responsável pelo tratamento: ${config.dataController}.`;
+
+  const privacidade = document.getElementById("associacaoPrivacidade");
+  const linkPrivacidade = document.createElement("a");
+  linkPrivacidade.href = config.privacyUrl;
+  linkPrivacidade.target = "_blank";
+  linkPrivacidade.rel = "noopener noreferrer";
+  linkPrivacidade.textContent = "Leia o aviso de privacidade";
+  privacidade.append(linkPrivacidade);
+
+  const contato = document.getElementById("associacaoContatoDados");
+  const linkContato = document.createElement("a");
+  linkContato.href = `mailto:${config.contactEmail}`;
+  linkContato.textContent = config.contactEmail;
+  contato.append("Para solicitar acesso ou exclusão dos dados, escreva para ", linkContato, ".");
+
+  [responsavel, privacidade, contato].forEach((element) => { element.hidden = false; });
+  form.querySelectorAll("input, button").forEach((element) => { element.disabled = false; });
+  status.textContent = "Serviço disponível. Leia o aviso de privacidade antes de enviar.";
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const dados = new FormData(form);
+    const cadastro = {
+      nome: String(dados.get("nome") || "").trim(),
+      email: String(dados.get("email") || "").trim(),
+      consentimento: dados.get("consentimento") === "on"
+    };
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+
+    try {
+      await window.PNVDatabase.saveAssociationInterest(cadastro);
+      form.reset();
+      feedback.textContent = "Solicitação registrada. Ela não formaliza filiação partidária.";
+      feedback.classList.remove("erro");
+    } catch {
+      feedback.textContent = "Não foi possível registrar a solicitação. Tente novamente mais tarde.";
+      feedback.classList.add("erro");
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
 }
 
