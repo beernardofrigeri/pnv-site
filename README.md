@@ -15,6 +15,8 @@ Site institucional estático do PNV, com cadastro de interesse integrado ao Supa
 - `script.js`, `database.js` — Comportamentos do site e integração com Supabase
 - `supabase/schema.sql` — Tabela e políticas de acesso do cadastro
 - `supabase-config.js` — Configuração pública do projeto Supabase
+- `img/` — Fotos originais fornecidas para a página inicial e a equipe
+- `assets/retratos/` — Cópias otimizadas usadas pelo site
 
 ## Cadastro com Supabase
 
@@ -59,6 +61,6 @@ Abra `http://127.0.0.1:8080`. Para testar o cadastro localmente, preencha `supab
 
 ## Conteúdo a completar
 
-- Substituir as imagens ilustrativas pelos retratos autorizados dos integrantes e do candidato.
 - Configurar canais de contato oficiais antes de divulgar a página.
 - Publicar o aviso de privacidade e informar os dados verdadeiros do responsável pelo tratamento.
+- Revisar as notícias de `data/pnv-db.json` e substituir informações de exemplo por publicações confirmadas antes da divulgação.

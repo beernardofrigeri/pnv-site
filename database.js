@@ -2,17 +2,12 @@
   const STORAGE_KEY = "pnv_contatos_v1";
   const CONSENT_VERSION = "interest-v1";
 
-  function safeParse(json, fallback) {
-    try {
-      return JSON.parse(json);
-    } catch {
-      return fallback;
-    }
-  }
-
   function readContacts() {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    return safeParse(raw, []);
+    if (raw === null) return [];
+    const contacts = JSON.parse(raw);
+    if (!Array.isArray(contacts)) throw new Error("Os rascunhos salvos estão em formato inválido.");
+    return contacts;
   }
 
   function writeContacts(contacts) {

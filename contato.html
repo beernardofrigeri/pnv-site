@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contato - PNV</title>
-  <meta name="description" content="Entre em contato com o PNV e envie sua mensagem, proposta ou sugestão." />
+  <meta name="description" content="Prepare uma mensagem para o PNV ou saiba como registrar interesse em participar." />
   <meta name="theme-color" content="#19031f" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="assets/logo-badge.png" />
@@ -32,7 +32,7 @@
     <header class="contato-abertura" data-reveal>
       <p class="eyebrow">Contato · PNV</p>
       <h1 class="page-title">Toda ideia<br /><em>abre caminhos.</em></h1>
-      <p>Escreva uma sugestão, uma pergunta ou uma proposta para o partido.</p>
+      <p>Prepare uma sugestão, pergunta ou proposta e conheça as opções de participação.</p>
     </header>
 
     <section class="contato-layout" data-reveal>
@@ -41,7 +41,8 @@
         <p class="eyebrow">Vamos conversar</p>
         <h2>Uma mensagem pode ser o começo.</h2>
         <p>
-          Envie seu rascunho pelo formulário. Para registrar interesse em participar do partido,
+          O formulário ao lado é um espaço para preparar sua mensagem: ele salva um rascunho
+          neste dispositivo, mas não envia à equipe. Para registrar interesse em participar,
           acesse a página de associação.
         </p>
         <a class="contato-link-associar" href="associar.html">Tenho interesse em me associar <span>↗</span></a>
@@ -49,15 +50,19 @@
 
       <section class="contato-form-bloco">
         <form id="formContato" class="contato-form">
-          <p class="contato-form-nota">O rascunho fica salvo apenas neste navegador e não é encaminhado à equipe.</p>
+          <div class="contato-form-intro">
+            <p class="eyebrow">Seu espaço de escrita</p>
+            <h2>Prepare sua mensagem</h2>
+            <p class="contato-form-nota">Este formulário não envia mensagens. O rascunho fica salvo apenas neste navegador.</p>
+          </div>
           <label>Nome completo
-            <input type="text" name="nome" placeholder="Seu nome completo" required />
+            <input type="text" name="nome" autocomplete="name" placeholder="Seu nome completo" required />
           </label>
           <label>E-mail
-            <input type="email" name="email" placeholder="nome@exemplo.com" required />
+            <input type="email" name="email" autocomplete="email" placeholder="nome@exemplo.com" required />
           </label>
           <label>Telefone (opcional)
-            <input type="text" name="telefone" placeholder="(00) 90000-0000" />
+            <input type="tel" name="telefone" autocomplete="tel" placeholder="(00) 90000-0000" />
           </label>
           <label>Assunto
             <input type="text" name="assunto" placeholder="Ex: Sugestão para o bairro" />
@@ -73,7 +78,7 @@
 
     <section class="mensagens-salvas" data-reveal>
       <h2>Seu arquivo local</h2>
-      <p>Rascunhos guardados neste navegador.</p>
+      <p>Até cinco rascunhos recentes aparecem aqui. Eles ficam neste navegador, não são enviados e podem ser acessados por outras pessoas que usem este dispositivo.</p>
       <button type="button" class="btn-secundario" id="limparMensagens">Limpar histórico local</button>
       <ul id="mensagensSalvas" class="mensagens-lista">
         <li class="vazio">Ainda não há mensagens salvas neste dispositivo.</li>
@@ -83,7 +88,10 @@
 
   <footer>
     <div class="footer-top">
-      <div class="footer-marca">VOTE<br /><span>50</span></div>
+      <div class="footer-identidade">
+        <a class="footer-marca" href="index.html" aria-label="PNV — página inicial">VOTE <span>50</span></a>
+        <p>Nova visão para o bem do cidadão.</p>
+      </div>
       <nav class="footer-nav" aria-label="Navegação do rodapé">
         <a href="index.html">Início</a>
         <a href="sobre.html">Sobre</a>
@@ -93,6 +101,10 @@
         <a href="associar.html">Associe-se</a>
         <a href="contato.html">Contato</a>
       </nav>
+      <div class="footer-participe">
+        <p>Faça parte da conversa.</p>
+        <a href="associar.html">Conheça a participação <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 PNV — Partido Nova Visão</span>

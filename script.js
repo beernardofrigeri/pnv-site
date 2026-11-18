@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const href = link.getAttribute("href");
     if (href === atual) {
       link.classList.add("active");
+      link.setAttribute("aria-current", "page");
     }
   });
 
@@ -34,7 +35,121 @@ document.addEventListener("DOMContentLoaded", () => {
   inicializarNoticias();
   inicializarContato();
   inicializarAssociacao();
+  inicializarPerfis();
 });
+
+function inicializarPerfis() {
+  const dialogo = document.querySelector(".perfil-dialog");
+  if (!dialogo || typeof dialogo.showModal !== "function") return;
+
+  const nome = dialogo.querySelector("#perfil-nome");
+  const cargo = dialogo.querySelector("#perfil-cargo");
+  const descricao = dialogo.querySelector("#perfil-descricao");
+  const foto = dialogo.querySelector("#perfil-foto");
+  const contador = dialogo.querySelector(".perfil-contador");
+  const galeria = dialogo.querySelector(".perfil-galeria");
+  let fotos = [];
+  let indice = 0;
+  let solicitado = 0;
+  let requisicao = 0;
+  let imagemEmCarregamento = null;
+  let toqueInicial = null;
+
+  function cancelarCarregamento() {
+    if (imagemEmCarregamento) {
+      imagemEmCarregamento.onload = null;
+      imagemEmCarregamento.onerror = null;
+      imagemEmCarregamento = null;
+    }
+  }
+
+  function mostrarFoto() {
+    foto.src = fotos[indice];
+    foto.alt = indice === 0
+      ? `Retrato de ${nome.textContent}`
+      : `${nome.textContent} fazendo o sinal de 50 com as mãos`;
+    contador.textContent = `Foto ${indice + 1} de ${fotos.length}`;
+  }
+
+  function mudarFoto(direcao) {
+    solicitado = (solicitado + direcao + fotos.length) % fotos.length;
+    const destino = solicitado;
+    const atual = ++requisicao;
+    cancelarCarregamento();
+    if (destino === indice) {
+      mostrarFoto();
+      return;
+    }
+
+    const imagem = new Image();
+    imagemEmCarregamento = imagem;
+    contador.textContent = "Carregando foto...";
+    imagem.onload = () => {
+      if (atual !== requisicao || !dialogo.open) return;
+      imagemEmCarregamento = null;
+      indice = destino;
+      mostrarFoto();
+      if (typeof foto.animate === "function" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        foto.getAnimations().forEach((animacao) => animacao.cancel());
+        foto.animate(
+          [{ opacity: 0.35, transform: `translateX(${direcao * 12}px)` }, { opacity: 1, transform: "translateX(0)" }],
+          { duration: 300, easing: "ease-out" }
+        );
+      }
+    };
+    imagem.onerror = () => {
+      if (atual !== requisicao || !dialogo.open) return;
+      imagemEmCarregamento = null;
+      solicitado = indice;
+      contador.textContent = "Não foi possível carregar a foto. Tente novamente.";
+    };
+    imagem.src = fotos[destino];
+  }
+
+  document.querySelectorAll(".integrante-abrir").forEach((botao) => {
+    botao.addEventListener("click", () => {
+      const integrante = botao.closest(".integrante");
+      nome.textContent = integrante.querySelector(".integrante-nome").textContent;
+      cargo.textContent = integrante.querySelector(".integrante-cargo").textContent;
+      descricao.textContent = integrante.dataset.descricao;
+      fotos = [integrante.querySelector("img").getAttribute("src"), integrante.dataset.segundaFoto];
+      indice = 0;
+      solicitado = 0;
+      requisicao++;
+      cancelarCarregamento();
+      mostrarFoto();
+      dialogo.showModal();
+    });
+  });
+
+  dialogo.querySelector(".perfil-fechar").addEventListener("click", () => dialogo.close());
+  dialogo.addEventListener("close", () => {
+    if (!dialogo.open) {
+      requisicao++;
+      cancelarCarregamento();
+    }
+  });
+  dialogo.querySelector(".perfil-anterior").addEventListener("click", () => mudarFoto(-1));
+  dialogo.querySelector(".perfil-proxima").addEventListener("click", () => mudarFoto(1));
+  galeria.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      mudarFoto(event.key === "ArrowRight" ? 1 : -1);
+    }
+  });
+  galeria.addEventListener("touchstart", (event) => {
+    if (event.touches.length === 1) {
+      toqueInicial = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    }
+  }, { passive: true });
+  galeria.addEventListener("touchend", (event) => {
+    if (!toqueInicial || event.changedTouches.length !== 1) return;
+    const dx = event.changedTouches[0].clientX - toqueInicial.x;
+    const dy = event.changedTouches[0].clientY - toqueInicial.y;
+    toqueInicial = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) mudarFoto(dx < 0 ? 1 : -1);
+  });
+}
 
 function formatarData(isoDate) {
   const date = new Date(isoDate);
@@ -42,7 +157,8 @@ function formatarData(isoDate) {
   return date.toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "2-digit",
-    year: "numeric"
+    year: "numeric",
+    ...(isoDate.length === 10 ? { timeZone: "UTC" } : {})
   });
 }
 
@@ -65,6 +181,7 @@ async function inicializarNoticias() {
     const noticias = await window.PNVDatabase.getNews();
     if (!noticias.length) {
       lista.innerHTML = "<p class=\"vazio\">Nenhuma notícia disponível no momento.</p>";
+      if (destaque) destaque.innerHTML = "<h2>Nenhuma notícia disponível no momento.</h2>";
       return;
     }
 
@@ -112,11 +229,16 @@ async function inicializarNoticias() {
         btn.type = "button";
         btn.className = "filtro-btn";
         if (categoria === categoriaAtual) btn.classList.add("ativo");
+        btn.setAttribute("aria-pressed", String(categoria === categoriaAtual));
         btn.textContent = categoria;
         btn.addEventListener("click", () => {
           categoriaAtual = categoria;
-          filtros.querySelectorAll(".filtro-btn").forEach((el) => el.classList.remove("ativo"));
+          filtros.querySelectorAll(".filtro-btn").forEach((el) => {
+            el.classList.remove("ativo");
+            el.setAttribute("aria-pressed", "false");
+          });
           btn.classList.add("ativo");
+          btn.setAttribute("aria-pressed", "true");
           renderNoticias();
         });
         filtros.appendChild(btn);
@@ -126,6 +248,7 @@ async function inicializarNoticias() {
     renderNoticias();
   } catch {
     lista.innerHTML = "<p class=\"vazio\">Não foi possível carregar as notícias agora.</p>";
+    if (destaque) destaque.innerHTML = "<h2>Não foi possível carregar o destaque agora.</h2>";
   }
 }
 
@@ -138,7 +261,13 @@ function inicializarContato() {
 
   const renderLista = () => {
     if (!lista) return;
-    const contatos = window.PNVDatabase.listContacts(5);
+    let contatos;
+    try {
+      contatos = window.PNVDatabase.listContacts(5);
+    } catch {
+      lista.innerHTML = "<li class=\"vazio\">Não foi possível acessar os rascunhos neste navegador.</li>";
+      return;
+    }
     if (!contatos.length) {
       lista.innerHTML = "<li class=\"vazio\">Ainda não há mensagens salvas neste dispositivo.</li>";
       return;
@@ -178,7 +307,15 @@ function inicializarContato() {
       return;
     }
 
-    window.PNVDatabase.saveContact(contato);
+    try {
+      window.PNVDatabase.saveContact(contato);
+    } catch {
+      if (feedback) {
+        feedback.textContent = "Não foi possível salvar neste navegador. Sua mensagem continua preenchida.";
+        feedback.classList.add("erro");
+      }
+      return;
+    }
     form.reset();
     if (feedback) {
       feedback.textContent = "Rascunho salvo neste navegador. Ele não foi enviado à equipe.";
@@ -189,7 +326,15 @@ function inicializarContato() {
 
   if (limpar) {
     limpar.addEventListener("click", () => {
-      window.PNVDatabase.clearContacts();
+      try {
+        window.PNVDatabase.clearContacts();
+      } catch {
+        if (feedback) {
+          feedback.textContent = "Não foi possível limpar os rascunhos neste navegador.";
+          feedback.classList.add("erro");
+        }
+        return;
+      }
       if (feedback) {
         feedback.textContent = "Histórico local removido deste navegador.";
         feedback.classList.remove("erro");
